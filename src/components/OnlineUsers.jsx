@@ -10,17 +10,19 @@ function OnlineUsers() {
           documents.map((doc) => {
             return (
               <li key={doc.id}>
-                <div className=" flex  gap-5">
+                <div className="flex gap-4 justify-center">
                   <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2 mb-5">
-                    <img src={doc.photoURL} />
+                    <img className="" src={doc.photoURL} />
                   </div>
-                  <p
-                    className={`${
-                      doc.online ? "text-lime-600" : "text-red-600"
-                    }`}
-                  >
-                    {doc.displayName}
-                  </p>
+                  <div>
+                    <p
+                      className={`${
+                        doc.online ? "text-lime-600" : "text-red-600"
+                      }`}
+                    >
+                      {doc.displayName}
+                    </p>
+                  </div>
                 </div>
               </li>
             );

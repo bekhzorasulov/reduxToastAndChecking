@@ -57,12 +57,15 @@ function Create() {
   }, [createActionData]);
 
   return (
-    <div className="mx-48">
-      <h2 className="text-3xl font-semibold text-black">
+    <div className="flex flex-col items-center px-5">
+      <h2 className="text-3xl font-semibold text-black mb-10 text-center">
         {" "}
         Create a new project
       </h2>
-      <Form method="post" className="flex flex-col gap-7 max-w-[450px] w-full">
+      <Form
+        method="post"
+        className="flex flex-col gap-7 max-w-[700px] w-full justify-center bg-white p-10 shadow-lg rounded-lg border border-gray-300"
+      >
         <FormInput
           label="Project name"
           type="text"
