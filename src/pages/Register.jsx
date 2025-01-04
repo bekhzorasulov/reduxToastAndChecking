@@ -34,7 +34,7 @@ function Register() {
   }, [data]);
 
   return (
-    <div className="h-screen grid place-items-center w-full">
+    <div className="min-h-screen grid place-items-center w-full">
       <Form method="post" className="max-w-96 mx-auto w-full">
         <h2 className="text-4xl text-center mb-5 font-bold">Register</h2>
         <FormInput
@@ -43,7 +43,12 @@ function Register() {
           label="Display Name"
           name="name"
         />
-        <FormInput type="email" placeholder="Name" label="Email" name="email" />
+        <FormInput
+          type="email"
+          placeholder="Email"
+          label="Email"
+          name="email"
+        />
         <FormInput
           type="password"
           placeholder="Password"

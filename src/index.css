@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav-item .active {
+    @apply bg-slate-500 text-black;
+  }
+}

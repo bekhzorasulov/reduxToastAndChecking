@@ -8,12 +8,14 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
+import { action as CreateAction } from "./pages/Create";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 import { login, authReadyAct } from "./app/features/userSlice";
+import Create from "./pages/Create";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +33,11 @@ function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/create",
+          element: <Create />,
+          action: CreateAction,
         },
       ],
     },
