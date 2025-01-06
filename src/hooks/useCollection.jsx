@@ -5,7 +5,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 export function useCollection(collectionName) {
   const [documents, setDocuments] = useState(null);
   useEffect(() => {
-    const q = collection(db, "users");
+    const q = collection(db, collectionName);
     onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((snapshot) => {

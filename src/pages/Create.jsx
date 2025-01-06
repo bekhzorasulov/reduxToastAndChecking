@@ -1,12 +1,13 @@
 import FormTextare from "../components/FormTextare";
 import FormInput from "../components/FormInput";
-import { Form, useActionData } from "react-router-dom";
+import { Form, useActionData, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useEffect, useState } from "react";
 import { Timestamp } from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
 import { useFireStore } from "../hooks/useFireStore";
+import { useCollection } from "../hooks/useCollection";
 
 const animatedComponents = makeAnimated();
 
@@ -18,12 +19,6 @@ export async function action({ request }) {
   return { name, description, dueTo };
 }
 
-const usersOptions = [
-  { value: "user1", label: "User1" },
-  { value: "user2", label: "User2" },
-  { value: "user3", label: "User3" },
-];
-
 const projectTypes = [
   { value: "frontend", label: "Frontend" },
   { value: "backend", label: "Backend" },
@@ -31,10 +26,21 @@ const projectTypes = [
 ];
 
 function Create() {
-  const { addDocument } = useFireStore();
+  const navigate = useNavigate();
+  const { addDocument, isPanding } = useFireStore("projects");
+  const { documents } = useCollection("users");
   const createActionData = useActionData();
   const [assignedUsers, setAssignedUser] = useState([]);
   const [projectType, setProjectType] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    setUsers(
+      documents?.map((document) => {
+        return { value: { ...document }, label: document.displayName };
+      })
+    );
+  }, [documents]);
 
   const selectUser = (user) => {
     setAssignedUser(user);
@@ -42,16 +48,18 @@ function Create() {
   };
 
   const selectProjectType = (type) => {
-    setProjectType(type);
+    setProjectType(type.value);
   };
 
   useEffect(() => {
     if (createActionData) {
-      addDocument("projects", {
+      addDocument({
         ...createActionData,
         assignedUsers,
         projectType,
         createdAt: serverTimestamp(new Date()),
+      }).then(() => {
+        navigate("/");
       });
     }
   }, [createActionData]);
@@ -86,14 +94,23 @@ function Create() {
           </div>
           <Select
             onChange={selectUser}
-            options={usersOptions}
+            options={users}
             isMulti
             components={animatedComponents}
           />
         </label>
-        <div className="flex justify-end">
-          <button className="btn btn-outline btn-success">Add project</button>
-        </div>
+        {isPanding && (
+          <div className="flex justify-end">
+            <button className="btn btn-outline btn-success" disabled>
+              Loading...
+            </button>
+          </div>
+        )}
+        {!isPanding && (
+          <div className="flex justify-end">
+            <button className="btn btn-outline btn-success">Add project</button>
+          </div>
+        )}
       </Form>
     </div>
   );

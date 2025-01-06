@@ -1,8 +1,10 @@
 import { Form, Link, useActionData } from "react-router-dom";
 import FormInput from "../components/FormInput";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRegister } from "../hooks/useRegister";
-import { toast } from "react-toastify";
+import { validateSignupOrLoginData } from "../utils";
+import { useSelector } from "react-redux";
+import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
 
 // action
 export const action = async ({ request }) => {
@@ -10,28 +12,35 @@ export const action = async ({ request }) => {
   const displayName = form.get("name");
   const email = form.get("email");
   const password = form.get("password");
-  const repeatPassword = form.get("repeatPassword");
-  return { displayName, email, password, repeatPassword };
+  const confirmPassword = form.get("repeatPassword");
+  return { displayName, email, password, confirmPassword };
 };
 
 function Register() {
+  const { googleSignIn } = useAuthWithGoogle();
+  const { isPending } = useSelector((store) => store.user);
+  const [error, setError] = useState({
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const { registerWithEmailAndPassword } = useRegister();
-  const data = useActionData();
-  console.log(data);
+  const signUpActionData = useActionData();
   useEffect(() => {
-    if (data) {
-      if (!data.email || !data.password || !data.displayName) {
-        toast.error("Please fill all the fields!");
-        return;
+    if (signUpActionData) {
+      const { valid, errors } = validateSignupOrLoginData(
+        signUpActionData,
+        true
+      );
+      if (valid) {
+        const { displayName, email, password } = signUpActionData;
+        registerWithEmailAndPassword(displayName, email, password);
+      } else {
+        setError(errors);
       }
-      if (data.password !== data.repeatPassword) {
-        toast.error("Password is not correct!");
-        return;
-      }
-      toast.success("Successfully registered!");
-      registerWithEmailAndPassword(data.displayName, data.email, data.password);
     }
-  }, [data]);
+  }, [signUpActionData]);
 
   return (
     <div className="min-h-screen grid place-items-center w-full">
@@ -42,28 +51,56 @@ function Register() {
           placeholder="Name"
           label="Display Name"
           name="name"
+          error={error.displayName && "input-error"}
+          errorText={error.displayName}
         />
         <FormInput
           type="email"
           placeholder="Email"
           label="Email"
           name="email"
+          error={error.email && "input-error"}
+          errorText={error.email}
         />
         <FormInput
           type="password"
           placeholder="Password"
           label="Password"
           name="password"
+          error={error.password && "input-error"}
+          errorText={error.password}
         />
         <FormInput
           type="password"
           placeholder="Repeat Password"
           label="Repeat Password"
           name="repeatPassword"
+          error={error.confirmPassword && "input-error"}
+          errorText={error.confirmPassword}
         />
         <div className="my-5">
-          <button type="submit" className="btn btn-success btn-block">
-            Register
+          {!isPending && (
+            <button type="submit" className="btn btn-success btn-block">
+              Register
+            </button>
+          )}
+          {isPending && (
+            <button
+              type="submit"
+              className="btn btn-success btn-block"
+              disabled
+            >
+              Loading...
+            </button>
+          )}
+        </div>
+        <div>
+          <button
+            onClick={googleSignIn}
+            type="button"
+            className="btn btn-success btn-block"
+          >
+            Google
           </button>
         </div>
         <div className="text-center">

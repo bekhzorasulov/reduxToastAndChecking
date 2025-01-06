@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import About from "./pages/About";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
 import { action as RegisterAction } from "./pages/Register";
@@ -38,6 +39,10 @@ function App() {
           path: "/create",
           element: <Create />,
           action: CreateAction,
+        },
+        {
+          path: "about/:id",
+          element: <About />,
         },
       ],
     },

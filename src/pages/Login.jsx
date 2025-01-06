@@ -23,7 +23,7 @@ function Login() {
     }
   }, [data]);
   return (
-    <div className="min-h-screen grid place-items-center w-full">
+    <div className="h-screen grid place-items-center w-full">
       <Form method="post" className="max-w-96 mx-auto w-full">
         <h2 className="text-4xl text-center mb-5 font-bold">Log In</h2>
         <FormInput type="email" placeholder="Name" label="Email" name="email" />
