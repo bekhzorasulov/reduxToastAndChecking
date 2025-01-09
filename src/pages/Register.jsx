@@ -17,7 +17,7 @@ export const action = async ({ request }) => {
 };
 
 function Register() {
-  const { googleSignIn } = useAuthWithGoogle();
+  const { googleSignIn, isPanding } = useAuthWithGoogle();
   const { isPending } = useSelector((store) => store.user);
   const [error, setError] = useState({
     displayName: "",
@@ -96,11 +96,12 @@ function Register() {
         </div>
         <div>
           <button
+            disabled={isPanding}
             onClick={googleSignIn}
             type="button"
             className="btn btn-success btn-block"
           >
-            Google
+            {isPanding ? "Loading.." : "Google"}
           </button>
         </div>
         <div className="text-center">

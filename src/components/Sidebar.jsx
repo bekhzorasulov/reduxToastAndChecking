@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useLogout } from "../hooks/useLogout";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { PiProjectorScreenChartLight } from "react-icons/pi";
+import { RiUserSettingsLine } from "react-icons/ri";
 import { TbLogout2 } from "react-icons/tb";
 
 function Sidebar() {
@@ -26,6 +27,14 @@ function Sidebar() {
             <span className="flex items-center gap-2">
               <IoIosAddCircleOutline className="text-xl" />
               Create
+            </span>
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="block px-3 py-2 rounded-l-3xl" to="/profile">
+            <span className="flex items-center gap-2">
+              <RiUserSettingsLine className="text-xl" />
+              Profile
             </span>
           </NavLink>
         </li>

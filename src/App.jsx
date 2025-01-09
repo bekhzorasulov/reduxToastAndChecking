@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import About from "./pages/About";
+import Profile from "./pages/Profile";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
 import { action as RegisterAction } from "./pages/Register";
@@ -39,6 +40,10 @@ function App() {
           path: "/create",
           element: <Create />,
           action: CreateAction,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
         },
         {
           path: "about/:id",

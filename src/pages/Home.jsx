@@ -42,25 +42,3 @@ function Home() {
 }
 
 export default Home;
-
-{
-  /* <div>
-  <h1 className="text-3xl mb-10 ">Dashboard</h1>
-  <div className="grid grid-cols-3 gap-10">
-    {documents &&
-      documents.map((doc) => {
-        return (
-          <div className="card bg-neutral text-neutral-content w-full ">
-            <div className="card-body">
-              <h2 className="card-title">{doc.name}</h2>
-              <span>{new Date(doc.dueTo.toDate()).toLocaleDateString()}</span>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary">Buy Now</button>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-  </div>
-</div>; */
-}

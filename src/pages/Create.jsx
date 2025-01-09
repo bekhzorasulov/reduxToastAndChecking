@@ -44,7 +44,6 @@ function Create() {
 
   const selectUser = (user) => {
     setAssignedUser(user);
-    console.log(user);
   };
 
   const selectProjectType = (type) => {
@@ -55,7 +54,7 @@ function Create() {
     if (createActionData) {
       addDocument({
         ...createActionData,
-        assignedUsers,
+        assignedUsers: assignedUsers.map((au) => au.value),
         projectType,
         createdAt: serverTimestamp(new Date()),
       }).then(() => {
