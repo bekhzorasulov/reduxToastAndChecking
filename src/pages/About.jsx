@@ -55,7 +55,7 @@ function About() {
             </h3>
             <hr />
 
-            <p className="w-full p-2 bg-success text-black rounded-md mt-2 ">
+            <p className="w-full p-2 bg-base-100 text-black rounded-md mt-2 max-h-[125px] overflow-x-auto ">
               {document.description}
             </p>
             {/*BUTTONS */}
