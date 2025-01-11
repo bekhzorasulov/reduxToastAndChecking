@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
+import PageNotFound from "./pages/PageNotFound";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
 import { action as RegisterAction } from "./pages/Register";
@@ -22,10 +23,10 @@ import Create from "./pages/Create";
 function App() {
   const dispatch = useDispatch();
   const { user, authReady } = useSelector((store) => store.user);
-  console.log(user);
   const routes = createBrowserRouter([
     {
       path: "/",
+      errorElement: <PageNotFound />,
       element: (
         <ProtectedRoutes user={user}>
           <MainLayout />

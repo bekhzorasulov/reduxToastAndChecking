@@ -27,7 +27,7 @@ const projectTypes = [
 
 function Create() {
   const navigate = useNavigate();
-  const { addDocument, isPanding } = useFireStore("projects");
+  const { addDocument, state } = useFireStore("projects");
   const { documents } = useCollection("users");
   const createActionData = useActionData();
   const [assignedUsers, setAssignedUser] = useState([]);
@@ -54,6 +54,7 @@ function Create() {
     if (createActionData) {
       addDocument({
         ...createActionData,
+        comments: [],
         assignedUsers: assignedUsers.map((au) => au.value),
         projectType,
         createdAt: serverTimestamp(new Date()),
@@ -71,7 +72,7 @@ function Create() {
       </h2>
       <Form
         method="post"
-        className="flex flex-col gap-7 max-w-[700px] w-full justify-center bg-white p-10 shadow-lg rounded-lg border border-gray-300"
+        className="flex flex-col gap-7 max-w-[700px] w-full justify-center bg-base p-10 shadow-lg rounded-lg border border-gray-300"
       >
         <FormInput
           label="Project name"
@@ -98,14 +99,14 @@ function Create() {
             components={animatedComponents}
           />
         </label>
-        {isPanding && (
+        {state.isPanding && (
           <div className="flex justify-end">
             <button className="btn btn-outline btn-success" disabled>
               Loading...
             </button>
           </div>
         )}
-        {!isPanding && (
+        {!state.isPanding && (
           <div className="flex justify-end">
             <button className="btn btn-outline btn-success">Add project</button>
           </div>
