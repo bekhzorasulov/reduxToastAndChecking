@@ -41,7 +41,7 @@ function Sidebar() {
       </ul>
 
       <div className="mb-10 flex justify-center">
-        <button className="btn btn-outline btn-warning" onClick={logout}>
+        <button className="btn btn-warning border-black" onClick={logout}>
           <TbLogout2 />
           Log Out
         </button>

@@ -62,7 +62,7 @@ function About() {
             <div className="card-actions flex  justify-center gap-10">
               <div className="flex ">
                 <button
-                  className="py-2 px-4 mt-4 btn btn-outline btn-warning"
+                  className="py-2 px-4 mt-4 btn btn-warning text-black border-black hover:text-white"
                   type="button"
                   onClick={() => updateDocument(document.id)}
                 >
@@ -72,7 +72,7 @@ function About() {
 
               <div className="flex justify-end">
                 <button
-                  className="py-2 px-4 mt-4 btn btn-outline btn-warning"
+                  className="py-2 px-4 mt-4 btn btn-warning text-black border-black hover:text-white"
                   type="button"
                   onClick={() => deleteDocument(id)}
                 >

@@ -14,7 +14,7 @@ function Profile() {
         <img
           src={user.photoURL}
           alt=""
-          className="w-[150px] h-[150px] rounded-full text bg-base-100 border-4 border-white shadow-lg absolute left-1/2 transform -translate-x-1/2 -bottom-12"
+          className="w-[150px] h-[150px] rounded-full text bg-base border-4 border-white shadow-lg absolute left-1/2 transform -translate-x-1/2 -bottom-12"
         />
       </div>
 

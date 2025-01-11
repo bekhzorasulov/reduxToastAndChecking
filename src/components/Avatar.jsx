@@ -4,7 +4,11 @@ function Avatar({ user }) {
       className="flex
     flex-col items-center p-10"
     >
-      <img className="w-20 h-20 rounded-full" src={user.photoURL} alt="" />
+      <img
+        className="w-20 h-20 rounded-full bg-base"
+        src={user.photoURL}
+        alt=""
+      />
       <p className="font-bold text-l text-center">
         Hello, dear {user.displayName}!
       </p>
