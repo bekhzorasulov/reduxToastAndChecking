@@ -82,7 +82,7 @@ function About() {
             </div>
           </div>
         </div>
-        {/* <div className="max-h-[400px] overflow-x-auto">
+        <div className="max-h-[400px] overflow-x-auto">
           <h2 className="text-2xl ">Chat for comments:</h2>
           {document.comments.length == 0 ? (
             <h4 className="text-center my-10 italic opacity-50">
@@ -139,7 +139,7 @@ function About() {
               </button>
             </form>
           </div>
-        </div> */}
+        </div>
       </div>
     </>
   );
