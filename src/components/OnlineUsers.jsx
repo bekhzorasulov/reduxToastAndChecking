@@ -7,12 +7,8 @@ function OnlineUsers() {
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "wireframe"
   );
 
-  const handleToggle = (e) => {
-    if (!e.target.checked) {
-      setTheme("wireframe");
-    } else {
-      setTheme("light");
-    }
+  const handleToggle = () => {
+    setTheme((prev) => (prev == "wireframe" ? "light" : "wireframe"));
   };
 
   useEffect(() => {
@@ -45,7 +41,11 @@ function OnlineUsers() {
           ))}
       </ul>
       <label className="swap swap-rotate">
-        <input type="checkbox" onClick={handleToggle} />
+        <input
+          type="checkbox"
+          onChange={handleToggle}
+          defaultChecked={theme == "light"}
+        />
 
         {/* sun icon */}
         <svg
