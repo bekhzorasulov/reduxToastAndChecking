@@ -86,7 +86,7 @@ function useFireStore(collectionName) {
     try {
       await deleteDoc(doc(db, collectionName, id));
       toast.success("Project deleted successfully!");
-      navigate("/create");
+      navigate("/projects");
       dispatch({ type: "DELETE_DOCUMENT" });
     } catch (error) {
       toast.error(error.code);
