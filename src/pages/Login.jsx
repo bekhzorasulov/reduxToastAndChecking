@@ -3,6 +3,7 @@ import FormInput from "../components/FormInput";
 import { useLogin } from "../hooks/useLogin";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useAuthWithGoogle } from "../hooks/useAuthWithGoogle";
 // import { toast } from "react-toastify";
 
 export const action = async ({ request }) => {
@@ -13,6 +14,7 @@ export const action = async ({ request }) => {
 };
 
 function Login() {
+  const { googleSignIn, isPanding } = useAuthWithGoogle();
   const { isPending } = useSelector((store) => store.user);
   const { loginWithEmailAndPassword } = useLogin();
   const data = useActionData();
@@ -48,6 +50,16 @@ function Login() {
               Loading...
             </button>
           )}
+          <div className="mt-5">
+            <button
+              disabled={isPanding}
+              onClick={googleSignIn}
+              type="button"
+              className="btn btn-success btn-block"
+            >
+              {isPanding ? "Loading.." : "Google"}
+            </button>
+          </div>
         </div>
         <div className="text-center">
           <p>
