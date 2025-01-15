@@ -71,13 +71,13 @@ function useFireStore(collectionName) {
     try {
       let newDoc = await addDoc(collection(db, collectionName), data);
       toast.success("Project added successfully!");
-      navigate("/");
       dispatch({ type: "ADD_DOCUMENT", payload: newDoc });
     } catch (error) {
       toast.error(error.code);
       dispatch({ type: "ERROR", payload: error.code });
     } finally {
       dispatch({ type: "IS_PENDING", payload: false });
+      navigate("/");
     }
   };
 
@@ -86,7 +86,7 @@ function useFireStore(collectionName) {
     try {
       await deleteDoc(doc(db, collectionName, id));
       toast.success("Project deleted successfully!");
-      navigate("/projects");
+      navigate("/");
       dispatch({ type: "DELETE_DOCUMENT" });
     } catch (error) {
       toast.error(error.code);
