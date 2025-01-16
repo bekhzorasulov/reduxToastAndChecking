@@ -36,19 +36,23 @@ function App() {
         {
           index: true,
           element: <Home />,
+          errorElement: <PageNotFound />,
         },
         {
           path: "/create",
           element: <Create />,
           action: CreateAction,
+          errorElement: <PageNotFound />,
         },
         {
           path: "/profile",
           element: <Profile />,
+          errorElement: <PageNotFound />,
         },
         {
           path: "about/:id",
           element: <About />,
+          errorElement: <PageNotFound />,
         },
       ],
     },

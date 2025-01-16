@@ -84,9 +84,10 @@ function useFireStore(collectionName) {
   const deleteDocument = async (id) => {
     dispatch({ type: "IS_PENDING", payload: true });
     try {
+      navigate("/");
       await deleteDoc(doc(db, collectionName, id));
       toast.success("Project deleted successfully!");
-      navigate("/");
+
       dispatch({ type: "DELETE_DOCUMENT" });
     } catch (error) {
       toast.error(error.code);
